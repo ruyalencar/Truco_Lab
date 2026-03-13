@@ -1,7 +1,6 @@
 from models.jogador import Jogador
 from models.baralho import Baralho
-from models.baralho import VALORES
-from models.baralho import NAIPES
+from models.constantes import VALORES, NAIPES
 
 
 
@@ -34,14 +33,14 @@ class Jogo:
         self.vira = self.baralho.distribuir_carta()   #Definir o vira
 
     def definir_manilha(self):
-        valor_vira = self.vira[:-1]
+        valor_vira = self.vira.valores
         indice = self.baralho.valores.index(valor_vira)
         proximo_indice = (indice + 1) % len(self.baralho.valores)       #definir a manilha e criar um loop
-        self.manilha = self.baralho.valores[proximo_indice]
+        self.manilha = VALORES[proximo_indice]
 
     def mostrar_estado(self):
-        print ("Vira: {}" .format(self.vira))
-        print ("Manilha: {}" .format(self.manilha))
+        print (f"Vira: {self.vira}")
+        print (f"Manilha: {self.manilha}")
         print (self.jogador1.mostrar_mao())    #mostrar o resultado de tudo
         print (self.jogador2.mostrar_mao())
         print ("Cartas restantes: ", len(self.baralho.cartas))
